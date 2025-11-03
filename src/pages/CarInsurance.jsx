@@ -1,12 +1,26 @@
 import { Box, Button, Step, StepLabel, Stepper,Paper } from "@mui/material";
 import React, { useState } from "react";
 import BasicDetails from "../components/BasicDetails";
+import BasicCarDetails from "../components/BasicCarDetails";
+import InsurancePlanPage from "./EligiblePlans";
+import EligiblePlans from "./EligiblePlans";
 
 
 
 const steps = ['BASIC DETAILS', 'CHOOSE PLAN', 'PERSONAL DETAILS', 'PAYMENT'];
 
 function CarInsurance(){
+
+
+    const [carDetails,setCarDetails] = useState({
+        brand : "",
+        model : "",
+        variant : "",
+        planDetails : {},
+    })
+
+
+
   const [activeStep, setActiveStep] = useState(0);
 
   function handleBack(){
@@ -33,8 +47,10 @@ function CarInsurance(){
                 </Stepper>
 
                 <Paper sx={{p:3}}>
-                    {activeStep === 0 && <BasicDetails></BasicDetails>}
-     
+                    {/* <BasicDetails></BasicDetails> */}
+                    {activeStep === 0 && <BasicCarDetails formData={carDetails} setFormData={setCarDetails}></BasicCarDetails>}
+
+                    {activeStep == 1 && <EligiblePlans formData={carDetails} setFormData={setCarDetails}></EligiblePlans>}
                    </Paper> 
     
               
