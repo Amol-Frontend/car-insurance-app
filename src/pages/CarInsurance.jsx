@@ -31,6 +31,8 @@ function CarInsurance(){
      setActiveStep(activeStep+1);
   }
 
+  console.log("Car Insurance Details",carDetails);
+
     return (
         <>
 
