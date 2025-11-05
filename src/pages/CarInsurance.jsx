@@ -4,6 +4,8 @@ import BasicDetails from "../components/BasicDetails";
 import BasicCarDetails from "../components/BasicCarDetails";
 import InsurancePlanPage from "./EligiblePlans";
 import EligiblePlans from "./EligiblePlans";
+import PersonalDetails from "./PersonalDetails";
+import PaymentPage from "./PaymentPage";
 
 
 
@@ -17,6 +19,7 @@ function CarInsurance(){
         model : "",
         variant : "",
         planDetails : {},
+        personalData : {}
     })
 
 
@@ -52,7 +55,11 @@ function CarInsurance(){
                     {/* <BasicDetails></BasicDetails> */}
                     {activeStep === 0 && <BasicCarDetails formData={carDetails} setFormData={setCarDetails}></BasicCarDetails>}
 
-                    {activeStep == 1 && <EligiblePlans formData={carDetails} setFormData={setCarDetails}></EligiblePlans>}
+                    {activeStep == 1 && <EligiblePlans formData={carDetails} setFormData={setCarDetails} handleNext={handleNext}></EligiblePlans>}
+
+                    {activeStep == 2 && <PersonalDetails formData={carDetails} setFormData={setCarDetails} handleNext={handleNext}></PersonalDetails>}
+
+                    {activeStep == 3 && <PaymentPage formData={carDetails} setFormData={setCarDetails}></PaymentPage>}
                    </Paper> 
     
               

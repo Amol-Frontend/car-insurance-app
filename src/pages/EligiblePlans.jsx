@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-export default function EligiblePlans({ formData, setFormData }) {
+export default function EligiblePlans({ formData, setFormData , handleNext}) {
   const [plans, setPlans] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [idvDetails,setIdvDetails] = useState(null);
@@ -324,6 +324,7 @@ export default function EligiblePlans({ formData, setFormData }) {
                 color="warning"
                 fullWidth
                 sx={{ mt: 3, fontWeight: 600 }}
+                onClick={handleNext}
               >
                 Continue
               </Button>
