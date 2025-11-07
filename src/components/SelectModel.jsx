@@ -1,10 +1,15 @@
 import { Box, MenuItem, MenuList, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setModel } from "../features/insurance/carInsuranceSlice";
 
-function SelectModel({ brand, onSelect }) {
+function SelectModel({ onSelect }) {
 
   const [models, setModels] = useState([]);
+
+  const dispatch = useDispatch();
+  const {brand} = useSelector((state)=> state.carInsurance);
 
 
     function getModels() {
@@ -15,6 +20,11 @@ function SelectModel({ brand, onSelect }) {
                 setModels(resp.data[0].models);
             }
         }).catch(error => console.log(error));
+    }
+
+   function handleSelect(model){
+      dispatch(setModel(model));
+      onSelect(model);
     }
 
 
@@ -30,7 +40,7 @@ function SelectModel({ brand, onSelect }) {
                 <MenuList sx={{ maxHeight: 250, overflow: 'auto' }}>
                     {
                         models.map((item, index) => (
-                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => onSelect(item.concat)}>
+                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => handleSelect(item.concat)}>
                                 {item.concat}
                             </MenuItem>
                         ))

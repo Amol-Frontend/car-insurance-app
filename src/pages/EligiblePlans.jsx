@@ -13,12 +13,17 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setPlanDetails } from "../features/insurance/carInsuranceSlice";
 
-export default function EligiblePlans({ formData, setFormData , handleNext}) {
+export default function EligiblePlans({  handleNext}) {
   const [plans, setPlans] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [idvDetails,setIdvDetails] = useState(null);
   const [addons, setAddons] = useState([]);
+
+  const formData = useSelector((state)=> state.carInsurance);
+  const dispatch = useDispatch();
 
     const totalPremium = useMemo(() => {
         console.log("calculating total premium");
@@ -78,7 +83,8 @@ export default function EligiblePlans({ formData, setFormData , handleNext}) {
                 totalPremium : selectedPlan.price.net_premium + totalAddOns,
                 totalPremiumWithGst : totalPremium
             }
-            setFormData({ ...formData, planDetails: data })
+            // setFormData({ ...formData, planDetails: data })
+            dispatch(setPlanDetails({...data}));
         }
     }, [selectedPlan, addons, totalPremium]);
 

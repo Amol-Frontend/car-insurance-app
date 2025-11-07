@@ -1,14 +1,24 @@
 import { Box, MenuItem, MenuList, Tab, Tabs, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setVariant } from "../features/insurance/carInsuranceSlice";
 
 
-function SelectVariant({ model, onSelect }) {
+function SelectVariant({onSelect }) {
 
     const [variants, setVariants] = useState([]);
     const [filter, setFilter] = useState("All");
-
     const [fuelTypes,setFuleTypes] = useState([]);
+
+
+    const dispatch = useDispatch();
+    const {model} = useSelector((state)=> state.carInsurance);
+
+    function handleSelect(variantName){
+        dispatch(setVariant(variantName))
+        onSelect(variantName);
+    }
    // const [filteredVariants,setFilteredVariants] = useState([]);
 
     useEffect(() => {
@@ -72,7 +82,7 @@ function SelectVariant({ model, onSelect }) {
                 <MenuList sx={{ maxHeight: 250, overflow: 'auto' }}>
                     {
                         filterVariants.map((item, index) => (
-                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => onSelect(item.new_variant)}>
+                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => handleSelect(item.new_variant)}>
                                 {item.new_variant}
                             </MenuItem>
                         ))

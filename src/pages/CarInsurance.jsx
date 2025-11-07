@@ -53,7 +53,7 @@ function CarInsurance(){
 
                 <Paper sx={{p:3}}>
                     {/* <BasicDetails></BasicDetails> */}
-                    {activeStep === 0 && <BasicCarDetails formData={carDetails} setFormData={setCarDetails}></BasicCarDetails>}
+                    {activeStep === 0 && <BasicCarDetails></BasicCarDetails>}
 
                     {activeStep == 1 && <EligiblePlans formData={carDetails} setFormData={setCarDetails} handleNext={handleNext}></EligiblePlans>}
 

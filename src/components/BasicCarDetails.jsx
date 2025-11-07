@@ -6,12 +6,16 @@ import SelectVariant from "./SelectVariant";
 import { CreateOutlined } from "@mui/icons-material";
 import CreateIcon from '@mui/icons-material/Create';
 import EditIcon from '@mui/icons-material/Edit'
-function BasicCarDetails({ formData, setFormData }) {
+import { useSelector, useStore } from "react-redux";
+function BasicCarDetails() {
     const [step, setStep] = useState("brand");
+
+     const formData =  useSelector((state)=> state.carInsurance);
+     console.log("formData",formData);
 
     function handleSelect(key, value) {
         console.log("key" + key, "value" + value)
-        setFormData({ ...formData, [key]: value });
+     //   setFormData({ ...formData, [key]: value });
         if (step == 'brand') setStep("model");
         if (step == 'model') setStep("variant");
     }
@@ -26,11 +30,11 @@ function BasicCarDetails({ formData, setFormData }) {
                     }
 
                     {
-                        step == 'model' && <SelectModel brand={formData.brand} onSelect={(v) => handleSelect("model", v)}></SelectModel>
+                        step == 'model' && <SelectModel onSelect={(v) => handleSelect("model", v)}></SelectModel>
                     }
 
                     {
-                        step == 'variant' && <SelectVariant model={formData.model} onSelect={(v) => handleSelect("variant", v)}></SelectVariant>
+                        step == 'variant' && <SelectVariant  onSelect={(v) => handleSelect("variant", v)}></SelectVariant>
                     }
 
 

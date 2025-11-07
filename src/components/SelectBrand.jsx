@@ -1,5 +1,7 @@
 import { Box, MenuItem, MenuList, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setBrand } from "../features/insurance/carInsuranceSlice";
 
 function SelectBrand({onSelect}) {
     const [brands, setBrands] = useState([
@@ -30,6 +32,14 @@ function SelectBrand({onSelect}) {
     ]
     )
 
+    const dispatch = useDispatch();
+    
+    function handleSelect(brand){
+       dispatch(setBrand(brand));    
+        onSelect(brand);
+    }
+    
+
 
     return (
         <>
@@ -40,7 +50,7 @@ function SelectBrand({onSelect}) {
                 <MenuList>
                     {
                         brands.map((item, index) => (
-                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => onSelect(item.brandName)}>
+                            <MenuItem key={index} sx={{ fontSize: '14px' }} onClick={() => handleSelect(item.brandName)}>
                                 {item.brandName}
                             </MenuItem>
                         ))
